@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>New File</title>
+    </head>
+    <body>
+        <form action="/projects/<%=project._id%>/files" method="POST">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <button>Add</button>
+            <a href="/projects/<%=project._id%>">Back</a>
+        </form>
+    </body>
+</html>

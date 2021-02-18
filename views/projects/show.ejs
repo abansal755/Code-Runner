@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%=project.name%></title>
+    </head>
+    <body>
+        <h1>Name: <%=project.name%></h1>
+        <h2>Type: <%=project.type%></h2>
+        <a href="/projects">Back</a>
+        <a href="/projects/<%=project._id%>/files/new">New File</a>
+        <h2>Files</h2>
+        <ul>
+            <% for(const file of project.files){ %>
+                <li>
+                    <a href="/projects/<%=project._id%>/files/<%=file._id%>"><%=file.name%></a>
+                </li>
+            <% } %>
+        </ul>
+    </body>
+</html>

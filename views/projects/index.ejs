@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Projects</title>
+    </head>
+    <body>
+        <h1>My Projects</h1>
+        <form action="/logout" method="POST">
+            <a href="/">Home Page</a>
+            <button>Logout</button>
+        </form>
+        <a href="/projects/new">New Project</a>
+        <ul>
+            <% for(const project of user.projects){ %>
+                <li>
+                    <a href="/projects/<%=project._id%>"><%=project.name%> - <%=project.type%></a>
+                </li>
+            <% } %>
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>New Project</title>
+    </head>
+    <body>
+        <form action="/projects" method="POST">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div>
+                <input type="radio" name="type" id="c++" value="c++">
+                <label for="c++">C++</label>
+            </div>
+            <div>
+                <input type="radio" name="type" id="nodejs" value="nodejs">
+                <label for="nodejs">NodeJS</label>
+            </div>
+            <button>Create</button>
+            <a href="/projects">Back</a>
+        </form>
+    </body>
+</html>

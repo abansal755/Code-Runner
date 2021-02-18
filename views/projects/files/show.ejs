@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%=file.name%></title>
+    </head>
+    <body>
+        <form action="/projects/<%=project._id%>/files/<%=file._id%>?_method=PUT" method="POST">
+            <div>
+                <input type="text" value="<%=file.name%>" name="name">
+            </div>
+            <textarea name="data" id="data" cols="30" rows="10"><%=file.data%></textarea>
+            <div>
+                <button>Save</button>
+                <a href="/projects/<%=project._id%>">Back</a>
+            </div>
+        </form>
+    </body>
+</html>
