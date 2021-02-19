@@ -31,6 +31,7 @@ const session = require('express-session');
 const usersRouter = require('./routes/users');
 const projectsRouter = require('./routes/projects');
 const methodOverride = require('method-override');
+const apiRouter = require('./routes/api');
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
@@ -64,6 +65,7 @@ app.get('/',(req,res) => {
 
 app.use('/',usersRouter);
 app.use('/projects',projectsRouter);
+app.use('/api',apiRouter);
 
 app.use((req,res) => {
     throw new AppError('Not Found',404);
@@ -71,5 +73,5 @@ app.use((req,res) => {
 
 app.use((err,req,res,next) => {
     const {message,status = 500} = err;
-    res.render('error',{message,status});
+    res.status(status).render('error',{message,status});
 })
