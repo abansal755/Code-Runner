@@ -9,14 +9,12 @@
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name">
             </div>
-            <div>
-                <input type="radio" name="type" id="c++" value="c++">
-                <label for="c++">C++</label>
-            </div>
-            <div>
-                <input type="radio" name="type" id="nodejs" value="nodejs">
-                <label for="nodejs">NodeJS</label>
-            </div>
+            <% for(const type of types){ %>
+                <div>
+                    <input type="radio" name="type" id="<%=type%>" value="<%=type%>">
+                    <label for="<%=type%>"><%=type%></label>
+                </div>
+            <% } %>
             <button>Create</button>
             <a href="/projects">Back</a>
         </form>

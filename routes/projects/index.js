@@ -5,6 +5,7 @@ const wrapAsync = require('../../utils/wrapAsync');
 const Project = require('../../models/Project');
 const filesRouter = require('./files');
 const File = require('../../models/File');
+const extensions = require('../../config/extensions.json');
 
 router.get('/',middleware.ensureLogin,wrapAsync(async (req,res) => {
     await req.user.populate('projects').execPopulate();
@@ -12,7 +13,9 @@ router.get('/',middleware.ensureLogin,wrapAsync(async (req,res) => {
 }))
 
 router.get('/new',middleware.ensureLogin,(req,res) => {
-    res.render('projects/new');
+    const types = [];
+    for(const key in extensions) types.push(key);
+    res.render('projects/new',{types});
 })
 
 router.post('/',middleware.ensureLogin,wrapAsync(async (req,res) => {
