@@ -40,4 +40,14 @@ router.put('/:fileId',middleware.ensureLogin,
     })
 )
 
+router.delete('/:fileId',middleware.ensureLogin,
+    middleware.findProject,middleware.authorizeProject,
+    middleware.findFile,middleware.authorizeFile,
+    wrapAsync(async (req,res) => {
+        const file = await File.findByIdAndDelete(req.params.fileId);
+        await req.projectQuery.update({$pull: {files: file._id}});
+        res.redirect(`/projects/${req.projectQuery._id}`);
+    })
+)
+
 module.exports = router;

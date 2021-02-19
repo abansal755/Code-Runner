@@ -11,8 +11,11 @@
             <textarea name="data" id="data" cols="30" rows="10"><%=file.data%></textarea>
             <div>
                 <button>Save</button>
-                <a href="/projects/<%=project._id%>">Back</a>
             </div>
         </form>
+        <form action="/projects/<%=project._id%>/files/<%=file._id%>?_method=DELETE" method="POST">
+            <button>Delete</button>
+        </form>
+        <a href="/projects/<%=project._id%>">Back</a>
     </body>
 </html>
