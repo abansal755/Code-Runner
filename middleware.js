@@ -2,6 +2,7 @@ const AppError = require('./utils/AppError');
 const wrapAsync = require('./utils/wrapAsync');
 const Project = require('./models/Project');
 const File = require('./models/File');
+const extensions = require('./config/extensions.json');
 
 exports.ensureLogin = (req,res,next) => {
     if(req.isAuthenticated()) next();
@@ -46,3 +47,17 @@ exports.authorizeFile = wrapAsync(async (req,res,next) => {
     }
     throw new AppError('Forbidden', 403);
 })
+
+exports.validateExtension = (req,res,next) => {
+    for(const key in extensions){
+        if(req.projectQuery.type === key){
+            for(const ext of extensions[key]){
+                if(req.body.extension === ext){
+                    next();
+                    return;
+                }
+            }
+        }
+    }
+    throw new AppError('Invalid extension', 400);
+}

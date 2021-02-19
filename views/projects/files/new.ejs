@@ -8,6 +8,13 @@
             <div>
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name">
+                .
+                <input type="text" name="extension" id="extension" list="extension-datalist">
+                <datalist id="extension-datalist">
+                    <% for(const type of types){ %>
+                        <option value="<%=type%>">
+                    <% } %>
+                </datalist>
             </div>
             <button>Add</button>
             <a href="/projects/<%=project._id%>">Back</a>

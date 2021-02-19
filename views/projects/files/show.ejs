@@ -7,6 +7,13 @@
         <form action="/projects/<%=project._id%>/files/<%=file._id%>?_method=PUT" method="POST">
             <div>
                 <input type="text" value="<%=file.name%>" name="name">
+                .
+                <input type="text" name="extension" id="extension" value="<%=file.extension%>" list="extension-datalist">
+                <datalist id="extension-datalist">
+                    <% for(const type of types){ %>
+                        <option value="<%=type%>">
+                    <% } %>
+                </datalist>
             </div>
             <textarea name="data" id="data" cols="30" rows="10"><%=file.data%></textarea>
             <div>
