@@ -9,10 +9,7 @@ router.get('/new',middleware.ensureLogin,middleware.findProject,middleware.autho
 })
 
 router.post('/',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
-    const file = new File({
-        name: `${req.body.name}`,
-        data: ''
-    });
+    const file = new File({name: req.body.name});
     await file.save();
     req.projectQuery.files.push(file);
     await req.projectQuery.save();
@@ -31,10 +28,9 @@ router.put('/:fileId',middleware.ensureLogin,
     middleware.findProject,middleware.authorizeProject,
     middleware.findFile,middleware.authorizeFile,
     wrapAsync(async (req,res) => {
-        const {name,data} = req.body;
         await req.fileQuery.update({
-            name,
-            data
+            name: req.body.name,
+            data: req.body.data
         });
         res.redirect(`/projects/${req.projectQuery._id}/files/${req.fileQuery._id}`);
     })
@@ -44,8 +40,8 @@ router.delete('/:fileId',middleware.ensureLogin,
     middleware.findProject,middleware.authorizeProject,
     middleware.findFile,middleware.authorizeFile,
     wrapAsync(async (req,res) => {
-        const file = await File.findByIdAndDelete(req.params.fileId);
-        await req.projectQuery.update({$pull: {files: file._id}});
+        await File.deleteOne({_id: req.fileQuery._id});
+        await req.projectQuery.update({$pull: {files: req.fileQuery._id}});
         res.redirect(`/projects/${req.projectQuery._id}`);
     })
 )

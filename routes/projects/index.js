@@ -29,9 +29,21 @@ router.get('/:id',middleware.ensureLogin,middleware.findProject,middleware.autho
 }))
 
 router.delete('/:id',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
-    const project = await Project.findByIdAndDelete(req.params.id);
-    for(const file of project.files) await File.deleteOne({_id: file});
+    await Project.deleteOne({_id: req.projectQuery._id})
+    for(const file of req.projectQuery.files) await File.deleteOne({_id: file});
     res.redirect('/projects');
+}))
+
+router.get('/:id/settings',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,(req,res) => {
+    res.render('projects/settings',{project: req.projectQuery});
+})
+
+router.patch('/:id',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
+    await req.projectQuery.update({
+        name: req.body.name,
+        start: req.body.start
+    });
+    res.redirect(`/projects/${req.projectQuery._id}`);
 }))
 
 router.use('/:id/files',filesRouter);

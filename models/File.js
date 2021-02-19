@@ -7,7 +7,8 @@ const fileSchema = new mongoose.Schema({
     },
     data: {
         type: String,
-        required: true
+        required: true,
+        default: ''
     }
 })
 

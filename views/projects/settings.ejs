@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Settings</title>
+    </head>
+    <body>
+        <form action="/projects/<%=project._id%>?_method=PATCH" method="POST">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="<%=project.name%>">
+            </div>
+            <div>
+                <label for="start">Start</label>
+                <input type="text" name="start" id="start" value="<%=project.start%>">
+            </div>
+            <button>Save</button>
+        </form>
+        <form action="/projects/<%=project._id%>?_method=DELETE" method="POST">
+            <button>Delete Project</button>
+        </form>
+        <a href="/projects/<%=project._id%>">Back</a>
+    </body>
+</html>

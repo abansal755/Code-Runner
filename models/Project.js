@@ -13,7 +13,12 @@ const projectSchema = new mongoose.Schema({
     files: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'File'
-    }]
+    }],
+    start: {
+        type: String,
+        required: true,
+        default: ''
+    }
 })
 
 module.exports = mongoose.model('Project',projectSchema);

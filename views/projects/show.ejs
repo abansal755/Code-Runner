@@ -8,9 +8,7 @@
         <h2>Type: <%=project.type%></h2>
         <a href="/projects">Back</a>
         <a href="/projects/<%=project._id%>/files/new">New File</a>
-        <form action="/projects/<%=project._id%>?_method=DELETE" method="POST">
-            <button>Delete Project</button>
-        </form>
+        <a href="/projects/<%=project._id%>/settings">Settings</a>
         <h2>Files</h2>
         <ul>
             <% for(const file of project.files){ %>
