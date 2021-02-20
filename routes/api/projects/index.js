@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const wrapAsync = require('../../utils/wrapAsync');
-const middleware = require('../../middleware');
-const Project = require('../../models/Project');
-const File = require('../../models/File');
+const wrapAsync = require('../../../utils/wrapAsync');
+const middleware = require('../../../middleware');
+const Project = require('../../../models/Project');
+const File = require('../../../models/File');
 const {exec} = require('child_process');
 const fs = require('fs/promises');
+const filesRouter = require('./files');
 
 router.get('/',middleware.ensureLogin,wrapAsync(async (req,res) => {
     await req.user.populate('projects').execPopulate();
@@ -21,7 +22,6 @@ router.post('/',middleware.ensureLogin,wrapAsync(async (req,res) => {
 }))
 
 router.get('/:id',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
-    await req.projectQuery.populate('files').execPopulate();
     res.send(req.projectQuery);
 }))
 
@@ -50,5 +50,7 @@ router.get('/:id/run',middleware.ensureLogin,middleware.findProject,middleware.a
         res.send(consoleData);
     })
 }))
+
+router.use('/:id/files',filesRouter);
 
 module.exports = router;
