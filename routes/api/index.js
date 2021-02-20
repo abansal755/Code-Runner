@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const projectsRouter = require('./projects');
+const filesRouter = require('./files');
 const AppError = require('../../utils/AppError');
 
-router.use('/projects',projectsRouter);
+router.use('/projects/:id/files',filesRouter);
 
 router.use((req,res) => {
     throw new AppError('Not Found',404);

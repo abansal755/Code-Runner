@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
-const middleware = require('../../../middleware');
-const wrapAsync = require('../../../utils/wrapAsync');
-const File = require('../../../models/File');
+const middleware = require('../../middleware');
+const wrapAsync = require('../../utils/wrapAsync');
+const File = require('../../models/File');
 
 router.get('/',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
-    await req.projectQuery.populate('files').execPopulate();
+    // await req.projectQuery.populate('files').execPopulate();
     res.send(req.projectQuery.files);
 }))
 
 router.post('/',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,middleware.validateExtension,wrapAsync(async (req,res) => {
-        const file = new File({name: `${req.body.name}.${req.body.extension}`});
-        await file.save();
-        req.projectQuery.files.push(file);
-        await req.projectQuery.save();
-        res.send('');
+    const file = new File({name: `${req.body.name}.${req.body.extension}`});
+    await file.save();
+    req.projectQuery.files.push(file);
+    await req.projectQuery.save();
+    res.send('');
 }))
 
 router.get('/:fileId',middleware.ensureLogin,

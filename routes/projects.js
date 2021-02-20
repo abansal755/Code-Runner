@@ -5,8 +5,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const Project = require('../models/Project');
 const File = require('../models/File');
 const extensions = require('../config/extensions.json');
-const {exec} = require('child_process');
-const fs = require('fs/promises');
+const User = require('../models/User');
 
 router.get('/',middleware.ensureLogin,wrapAsync(async (req,res) => {
     await req.user.populate('projects').execPopulate();
@@ -33,8 +32,8 @@ router.get('/:id',middleware.ensureLogin,middleware.findProject,middleware.autho
 }))
 
 router.delete('/:id',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
-    await Project.deleteOne({_id: req.projectQuery._id})
-    for(const file of req.projectQuery.files) await File.deleteOne({_id: file});
+    await req.projectQuery.deleteOne();
+    await req.user.update({$pull: {projects: req.params.id}});
     res.redirect('/projects');
 }))
 
@@ -48,18 +47,6 @@ router.patch('/:id',middleware.ensureLogin,middleware.findProject,middleware.aut
         start: req.body.start
     });
     res.redirect(`/projects/${req.projectQuery._id}`);
-}))
-
-router.get('/:id/run',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
-    await fs.mkdir(`./files/${req.projectQuery._id}`,{recursive: true});
-    await req.projectQuery.populate('files').execPopulate();
-    for(const file of req.projectQuery.files) await fs.writeFile(`./files/${req.projectQuery._id}/${file.name}`,file.data);
-    exec(`cd files/${req.projectQuery._id} && ${req.projectQuery.start}`,async (error,stdout,stderr) => {
-        let consoleData;
-        if(error) consoleData = stderr;
-        else consoleData = stdout;
-        res.render('projects/run',{consoleData, project: req.projectQuery});
-    })
 }))
 
 module.exports = router;
