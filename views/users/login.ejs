@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
-        <form action="/login" method="POST">
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username">
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password">
-            </div>
-            <button>Login</button>
-            <a href="/">Home Page</a>
-        </form>
-    </body>
-</html>
+<%- include('../partials/start-container.ejs') %>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form class="card border-0" action="/login" method="POST" style="box-shadow: 0px 0px 21px 8px #0000001f;">
+                <div class="card-body">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="username" placeholder="." name="username">
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="password" class="form-control" id="password" placeholder="." name="password">
+                        <label for="password">Password</label>
+                    </div>
+                    <button class="btn btn-primary">Login</button>
+                    <a href="/register" class="btn btn-primary">Not Registered? Click Here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+<%- include('../partials/end-container.ejs') %>
