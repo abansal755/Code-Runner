@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>New Project</title>
-    </head>
-    <body>
-        <form action="/projects" method="POST">
-            <div>
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name">
-            </div>
-            <% for(const type of types){ %>
-                <div>
-                    <input type="radio" name="type" id="<%=type%>" value="<%=type%>">
-                    <label for="<%=type%>"><%=type%></label>
+<%- include('../partials/start-container.ejs') %>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form class="card border-0 needs-validation" action="/projects" method="POST" style="box-shadow: 0px 0px 21px 8px #0000001f;" novalidate>
+                <div class="card-body">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="name" placeholder="." name="name" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <% for(const type of types){ %>
+                        <div class="form-check">
+                            <input type="radio" name="type" id="<%=type%>" value="<%=type%>" class="form-check-input" required>
+                            <label for="<%=type%>"><%=type%></label>
+                        </div>
+                    <% } %>
+                    <div class="mt-2">
+                        <button class="btn btn-primary">Create</button>
+                        <a href="/projects" class="btn btn-primary">Back</a>
+                    </div>
                 </div>
-            <% } %>
-            <button>Create</button>
-            <a href="/projects">Back</a>
-        </form>
-    </body>
-</html>
+            </form>
+        </div>
+    </div>
+    <script src="/js/form-validation.js"></script>
+<%- include('../partials/end-container.ejs') %>
