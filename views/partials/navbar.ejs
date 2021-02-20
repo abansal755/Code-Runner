@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a href="" class="navbar-brand">Code Runner</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-content">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav" id="navbar-content">
+            <a class="nav-link" href="/" id="nav-home">Home</a>
+            <a class="nav-link" href="/projects" id="nav-projects">Projects</a>
+            <% if(user){ %>
+                <form action="/logout" method="POST" class="ms-md-auto">
+                    <button class="btn btn-light">Logout</button>
+                </form>
+            <% }else{ %>
+                <a href="/login" class="btn btn-light ms-md-auto">Login</a>
+            <% } %>
+        </div>
+    </div>
+</nav>

@@ -1,21 +1,24 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>My Projects</title>
-    </head>
-    <body>
-        <h1>My Projects</h1>
-        <form action="/logout" method="POST">
-            <a href="/">Home Page</a>
-            <button>Logout</button>
-        </form>
-        <a href="/projects/new">New Project</a>
-        <ul>
-            <% for(const project of user.projects){ %>
-                <li>
-                    <a href="/projects/<%=project._id%>"><%=project.name%> - <%=project.type%></a>
-                </li>
-            <% } %>
-        </ul>
-    </body>
-</html>
+<%- include('../partials/start-container.ejs') %>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>
+            Projects <sup><span class="badge bg-dark rounded-pill"><%=user.projects.length%></span></sup>
+        </h1>
+        <a href="/projects/new">
+            <h1 class="btn btn-primary">New Project</h1>
+        </a>
+    </div>
+    <div class="row g-3">
+        <% for(const project of user.projects){ %>
+            <div class="col-md-6 col-lg-4 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="h5 mb-0"><%=project.name%></h2>
+                        <div class="text-muted"><%=project.type%></div>
+                        <a href="/projects/<%=project._id%>" class="btn btn-primary mt-2">Enter</a>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+    <script src="/js/projects/index.js"></script>
+<%- include('../partials/end-container.ejs') %>

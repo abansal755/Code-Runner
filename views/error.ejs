@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Error <%=status%></title>
-    </head>
-    <body>
-        <h1>Error <%=status%></h1>
-        <p><%=message%></p>
-        <a href="/">Home Page</a>
-    </body>
-</html>
+<%- include('partials/start-container.ejs') %>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="alert alert-danger d-flex justify-content-between align-items-center">
+                <div>
+                    <h1>Error <%=status%></h1>
+                    <p class="mb-0"><%=message%></p>
+                </div>
+                <div>
+                    <div class="spinner-border"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/error.js"></script>
+<%- include('partials/end-container.ejs') %>

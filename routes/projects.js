@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const middleware = require('../../middleware');
-const wrapAsync = require('../../utils/wrapAsync');
-const Project = require('../../models/Project');
-const filesRouter = require('./files');
-const File = require('../../models/File');
-const extensions = require('../../config/extensions.json');
+const middleware = require('../middleware');
+const wrapAsync = require('../utils/wrapAsync');
+const Project = require('../models/Project');
+const File = require('../models/File');
+const extensions = require('../config/extensions.json');
 const {exec} = require('child_process');
 const fs = require('fs/promises');
 
@@ -62,7 +61,5 @@ router.get('/:id/run',middleware.ensureLogin,middleware.findProject,middleware.a
         res.render('projects/run',{consoleData, project: req.projectQuery});
     })
 }))
-
-router.use('/:id/files',filesRouter);
 
 module.exports = router;
