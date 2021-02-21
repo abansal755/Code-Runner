@@ -44,11 +44,12 @@ function addFileToPage(file){
     const name = file.name.substr(0,idx);
     
     const btn = document.createElement('button');
-    btn.classList.add('nav-link');
+    btn.classList.add('nav-link','mb-2');
     btn.id = `v-pills-${file._id}-tab`;
     btn.setAttribute('data-bs-toggle','pill');
     btn.setAttribute('data-bs-target',`#v-pills-${file._id}`);
     btn.textContent = file.name;
+    btn.style.boxShadow = '0px 0px 21px -2px #0000001f';
     vPillsTab.append(btn);
 
     const tab = document.createElement('div');

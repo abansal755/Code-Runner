@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Settings</title>
-    </head>
-    <body>
-        <form action="/projects/<%=project._id%>?_method=PATCH" method="POST">
-            <div>
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" value="<%=project.name%>">
+<%- include('../partials/start-container.ejs') %>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card border-0" style="box-shadow: 0px 0px 21px 8px #0000001f;">
+                <div class="card-body">
+                    <form class="needs-validation" action="/projects/<%=project._id%>?_method=PATCH" method="POST" novalidate>
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="name" placeholder="." name="name" required value="<%=project.name%>">
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="start" placeholder="." name="start" value="<%=project.start%>">
+                            <label for="start">Start</label>
+                        </div>
+                        <button class="btn btn-primary">Save</button>
+                        <a href="/projects/<%=project._id%>" class="btn btn-primary">Back</a>
+                    </form>
+                    <form action="/projects/<%=project._id%>?_method=DELETE" method="POST" class="mt-2">
+                        <button class="btn btn-danger">Delete Project</button>
+                    </form>
+                </div>
             </div>
-            <div>
-                <label for="start">Start</label>
-                <input type="text" name="start" id="start" value="<%=project.start%>">
-            </div>
-            <button>Save</button>
-        </form>
-        <form action="/projects/<%=project._id%>?_method=DELETE" method="POST">
-            <button>Delete Project</button>
-        </form>
-        <a href="/projects/<%=project._id%>">Back</a>
-    </body>
-</html>
+        </div>
+    </div>
+    <script src="/js/form-validation.js"></script>
+<%- include('../partials/end-container.ejs') %>
