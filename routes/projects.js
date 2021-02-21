@@ -27,8 +27,7 @@ router.post('/',middleware.ensureLogin,wrapAsync(async (req,res) => {
 }))
 
 router.get('/:id',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {
-    await req.projectQuery.populate('files').execPopulate();
-    res.render('projects/show',{project: req.projectQuery});
+    res.render('projects/show',{project: req.projectQuery, types: extensions[req.projectQuery.type]});
 }))
 
 router.delete('/:id',middleware.ensureLogin,middleware.findProject,middleware.authorizeProject,wrapAsync(async (req,res) => {

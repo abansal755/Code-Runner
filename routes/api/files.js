@@ -14,7 +14,7 @@ router.post('/',middleware.ensureLogin,middleware.findProject,middleware.authori
     await file.save();
     req.projectQuery.files.push(file);
     await req.projectQuery.save();
-    res.send('');
+    res.send(file);
 }))
 
 router.get('/:fileId',middleware.ensureLogin,
