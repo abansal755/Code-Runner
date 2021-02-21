@@ -28,7 +28,7 @@ const projectSchema = new mongoose.Schema({
 })
 
 projectSchema.post('deleteOne',{document: true, query: false},wrapHook.post(async project => {
-    for(const file of project.files) await file.deleteOne();
+    for(const file of project.files) await File.deleteOne({_id: file});
 }))
 
 module.exports = mongoose.model('Project',projectSchema);

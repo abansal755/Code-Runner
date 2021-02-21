@@ -2,12 +2,30 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <h1><%=project.name%> <span class="badge bg-secondary"><%=project.type%></span></h1>
     <div class="d-flex">
-        <form id="add-file-form" class="me-2">
-            <button class="btn btn-primary">Add New File</button>
-        </form>
+        <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#new-file-modal">New File</button>
+        <div class="modal fade" id="new-file-modal" tabindex="-1">
+            <div class="modal-dialog">
+                <form class="modal-content" id="add-file-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New File</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" id="new-file-modal-close"></button>
+                    </div>
+                    <div class="modal-body d-flex">
+                        <input type="text" class="form-control" placeholder="Name" name="name" id="add-file-name">
+                        <span class="mx-2">.</span>
+                        <input type="text" name="extension" class="form-control" placeholder="Extension" id="add-file-extension" list="types-datalist">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <form id="run-project-form">
-            <button class="btn btn-primary">Run</button>
+            <button class="btn btn-primary me-2">Run</button>
         </form>
+        <a href="/projects/<%=project._id%>/settings" class="btn btn-primary me-2">Settings</a>
+        <a href="/projects" class="btn btn-primary">Back</a>
     </div>
     <div class="row mt-4 g-3">
         <div class="col-8">
@@ -19,7 +37,7 @@
             </div>
         </div>
         <div class="col-4">
-            <textarea name="" id="" cols="30" rows="10" class="form-control" disabled></textarea>
+            <textarea rows="10" class="form-control" disabled id="console-textarea"></textarea>
         </div>
     </div>
     <script>

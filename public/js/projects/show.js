@@ -1,6 +1,11 @@
 const vPillsTab = document.querySelector('#v-pills-tab');
 const vPillsTabContent = document.querySelector('#v-pills-tab-content');
 const addFileForm = document.querySelector('#add-file-form');
+const consoleTextarea = document.querySelector('#console-textarea');
+const runProjectForm = document.querySelector('#run-project-form');
+const addFileName = document.querySelector('#add-file-name');
+const addFileExtension = document.querySelector('#add-file-extension');
+const newFileModalClose = document.querySelector('#new-file-modal-close');
 
 async function getAllFilesRequest(){
     return axios.get(`/api/projects/${id}/files`);
@@ -29,6 +34,10 @@ async function deleteFileRequest(fileId){
     return axios.delete(`/api/projects/${id}/files/${fileId}`);
 }
 
+async function runProject(){
+    return axios.get(`/api/projects/${id}/run`);
+}
+
 function addFileToPage(file){
     const idx = file.name.lastIndexOf('.');
     const extension = file.name.substr(idx+1);
@@ -52,7 +61,7 @@ function addFileToPage(file){
                 <span class="mx-2">.</span>
                 <input type="text" class="form-control" name="extension" value="${extension}" list="types-datalist">
             </div>
-            <textarea name="data" class="form-control mb-2">${file.data}</textarea>
+            <textarea name="data" class="form-control mb-2" rows="10">${file.data}</textarea>
             <button class="btn btn-primary">Save</button>
         </form>
         <form class="mt-2 delete-form">
@@ -77,8 +86,20 @@ function addFileToPage(file){
 
 addFileForm.addEventListener('submit',async e => {
     e.preventDefault();
-    const file = (await createFileRequest('new','cpp')).data;
+    const file = (await createFileRequest(addFileName.value,addFileExtension.value)).data;
+    addFileForm.reset();
+    newFileModalClose.click();
     await addFileToPage(file);
+});
+
+runProjectForm.addEventListener('submit',async e => {
+    e.preventDefault();
+    const data = (await runProject()).data;
+    consoleTextarea.textContent = data;
+});
+
+newFileModalClose.addEventListener('click',() => {
+    addFileForm.reset();
 });
 
 (async function(){
