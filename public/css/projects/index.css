@@ -1,0 +1,13 @@
+.card {
+    box-shadow: 0px 0px 21px -2px #0000001f;
+    border: none;
+    border-bottom: 4px solid;
+}
+
+.card.nodejs {
+    border-bottom-color: #539e43;
+}
+
+.card.cpp {
+    border-bottom-color: #00589d;
+}
