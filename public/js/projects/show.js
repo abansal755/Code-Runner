@@ -90,12 +90,18 @@ function addFileToPage(file){
         await updateFileRequest(file._id,nameInput.value,extensionInput.value,editor.getValue());
         btn.textContent = `${nameInput.value}.${extensionInput.value}`;
         unsaveDot.remove();
-    })
+    });
     tab.querySelector('.btn-delete').addEventListener('click',async () => {
         await deleteFileRequest(file._id);
         btn.remove();
         tab.remove();
-    })
+    });
+    nameInput.addEventListener('input',() => {
+        btn.append(unsaveDot);
+    });
+    extensionInput.addEventListener('input',() => {
+        btn.append(unsaveDot);
+    });
     vPillsTabContent.append(tab);
     editorDiv.addEventListener('keydown',e => {
         if(e.code === 'KeyS' && e.ctrlKey){
