@@ -43,16 +43,18 @@
                     <button class="nav-link active">Console</button>
                 </li>
             </ul>
-            <textarea rows="10" class="form-control" disabled id="console-textarea"></textarea>
+            <textarea class="form-control" disabled id="console-textarea" style="height: 500px;"></textarea>
         </div>
     </div>
     <script>
-        const id = '<%=project._id%>';
+        const project = <%- JSON.stringify(project) %>;
     </script>
     <datalist id="types-datalist">
         <% for(const type of types){ %>
             <option value="<%=type%>">
         <% } %>
     </datalist>
+    <script src="/js/ace/src-min/ace.js"></script>
+    <script src="/js/ace/src-min/ext-language_tools.js"></script>
     <script src="/js/projects/show.js"></script>
 <%- include('../partials/end-container.ejs') %>
