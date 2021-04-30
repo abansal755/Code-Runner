@@ -1,3 +1,42 @@
-<%- include('partials/start.ejs') %>
-    <script src="/js/index.js"></script>
-<%- include('partials/end.ejs') %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/home.css">
+        <title>Code Runner</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark">
+            <div class="container d-sm-flex flex-sm-row flex-column">
+                <div class="navbar-nav flex-row">
+                    <a href="/" class="navbar-brand">Code Runner</a>
+                </div>
+                <div class="navbar-nav flex-row">
+                    <a href="/" class="nav-link ms-3 active">Home</a>
+                    <% if(!user){ %>
+                        <a href="/login" class="nav-link ms-3">Login</a>
+                        <a href="/register" class="nav-link ms-3">Register</a>
+                    <% }else{ %>
+                        <a href="/projects" class="nav-link ms-3">Projects</a>
+                        <form action="/logout" method="POST" id="logout-form">
+                            <a href="/" class="nav-link ms-3" id="logout-link">Logout</a>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        </nav>
+        <main class="text-center text-white">
+            <h1>Code Runner</h1>
+            <div>Welcome to Code Runner!</div>
+            <% if(user){ %>
+                <a href="/projects" class="btn btn-light mt-3"><b>View Projects</b></a>
+            <% }else{ %>
+                <a href="/login" class="btn btn-light mt-3"><b>Login To Start Working</b></a>
+            <% } %>
+        </main>
+        <footer class="text-white-50 py-3 text-center">&copy;Code Runner</footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="/js/home.js"></script>
+    </body>
+</html>
