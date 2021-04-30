@@ -103,7 +103,7 @@ function addFileToPage(file){
         btn.append(unsaveDot);
     });
     vPillsTabContent.append(tab);
-    editorDiv.addEventListener('keydown',e => {
+    function keyboardShortcuts(e){
         if(e.code === 'KeyS' && e.ctrlKey){
             saveBtn.click();
             e.preventDefault();
@@ -111,7 +111,10 @@ function addFileToPage(file){
             runProjectBtn.click();
             e.preventDefault();
         }
-    })
+    }
+    editorDiv.addEventListener('keydown',keyboardShortcuts);
+    nameInput.addEventListener('keydown',keyboardShortcuts);
+    extensionInput.addEventListener('keydown',keyboardShortcuts);
 }
 
 addFileForm.addEventListener('submit',async e => {
